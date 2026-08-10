@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.darshan.finance_tracker.dto.LoginRequest;
 import com.darshan.finance_tracker.dto.RegisterRequest;
 import com.darshan.finance_tracker.service.UserService;
 
@@ -29,5 +30,13 @@ public class AuthController {
 			@RequestBody RegisterRequest request) {
 		return userService.register(request);
 	}
+	
+	@PostMapping("/login")
+	public String login(@RequestBody LoginRequest request) {
+		
+		return userService.login(request);
+		
+	}
+	
 	
 }
