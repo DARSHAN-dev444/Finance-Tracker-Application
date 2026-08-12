@@ -10,6 +10,7 @@ import com.darshan.finance_tracker.dto.LoginRequest;
 import com.darshan.finance_tracker.dto.RegisterRequest;
 import com.darshan.finance_tracker.entity.User;
 import com.darshan.finance_tracker.repository.UserRepository;
+import com.darshan.finance_tracker.security.JwtService;
 
 @Service
 public class UserService {
@@ -19,6 +20,9 @@ public class UserService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private JwtService jwtService;
 	
 	public String register(RegisterRequest request) {
 		if(userRepository
@@ -53,7 +57,7 @@ public class UserService {
 		if(!matches) {
 			return "Invalid password";
 		}
-		return "Login Sucessful";
+		return jwtService.generateToken(user.getEmail());
 		
 	}
 	
